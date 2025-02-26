@@ -1,9 +1,11 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
-
-
-const Leaveod = ({navigation}) => {
+const Leaveod = ({ navigation }) => {
   const requests = [
     { id: 1, name: "Nisha", section: "CSE-B" },
     { id: 2, name: "Nisha", section: "CSE-B" },
@@ -12,17 +14,19 @@ const Leaveod = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      {/* Logo */}
-     <View style={styles.headerimg}> 
-             <Image
-               source={require("../assets/icons/jeclogo.png")}
-               style={styles.logo}
-             />
-             <Image
-               source={require("../assets/icons/notifications.png")}
-               style={styles.logonot}
-             />
-             </View>
+      {/* Header with Logo and Notification Icon */}
+      <View style={styles.headerimg}>
+        <Image
+          source={require("../assets/icons/jeclogo.png")}
+          style={styles.logo}
+        />
+        <Image
+          source={require("../assets/icons/notifications.png")}
+          style={styles.logonot}
+        />
+      </View>
+
+      {/* Header Text */}
       <Text style={styles.header}>LEAVE/OD REQUEST</Text>
 
       {/* Leave Request List */}
@@ -40,23 +44,21 @@ const Leaveod = ({navigation}) => {
       <TouchableOpacity style={styles.submitButton} onPress={() => navigation.navigate('Approveleave')}>
         <Text style={styles.submitText}>SUBMIT</Text>
       </TouchableOpacity>
-       <View style={styles.navbar}>
-                          <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Hod')}>
-                            <Image source={require("../assets/icons/home.png")} style={styles.homeimage}/>
-                            <Text style={styles.navLabel}>Home</Text> 
-                          </TouchableOpacity>
-                          <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
-                            <Image source={require("../assets/icons/profile.png")} style={styles.homeimage}/>
-                            <Text style={styles.navLabel}>Profile</Text> 
-                          </TouchableOpacity>
-            </View>
+
+      {/* Bottom Navigation Bar */}
+      <View style={styles.navbar}>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Hod')}>
+          <Image source={require("../assets/icons/home.png")} style={styles.homeimage} />
+          <Text style={styles.navLabel}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
+          <Image source={require("../assets/icons/profile.png")} style={styles.homeimage} />
+          <Text style={styles.navLabel}>Profile</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
-
-
-
-
 
 // Styles
 const styles = StyleSheet.create({
@@ -64,81 +66,72 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#0D1321",
   },
-  headerimg:{
-    display:'flex',
-    flexDirection:'row',
-   justifyContent:'space-between',
-   alignItems:'center',
-   backgroundColor:'white',
-   padding:10,
+  headerimg: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    padding: wp('3%'), // 3% of screen width
   },
   logo: {
-    width: 60,
-    height: 60,
-    borderRadius: 50,
-    
+    width: wp('15%'), // 15% of screen width
+    height: wp('15%'), // 15% of screen width (to maintain aspect ratio)
+    borderRadius: wp('15%') / 2, // Half of width/height for a circle
   },
-  logonot:{
-    width:30,
-    height:30,
+  logonot: {
+    width: wp('8%'), // 8% of screen width
+    height: wp('8%'), // 8% of screen width
   },
   header: {
     color: "white",
-    fontSize: 18,
+    fontSize: wp('5%'), // 5% of screen width
     fontWeight: "bold",
-    margin: 20,
+    margin: wp('5%'), // 5% of screen width
   },
   card: {
     flexDirection: "row",
     justifyContent: "space-between",
     backgroundColor: "#E0E0E0",
-    padding: 25,
-    borderRadius: 10,
-    margin:20,
+    padding: wp('6%'), // 6% of screen width
+    borderRadius: wp('2%'), // 2% of screen width
+    margin: wp('5%'), // 5% of screen width
   },
   requestText: {
-    fontSize: 16,
+    fontSize: wp('4%'), // 4% of screen width
     color: "black",
   },
   submitButton: {
     backgroundColor: "blue",
-    padding: 10,
-    borderRadius: 10,
+    padding: wp('3%'), // 3% of screen width
+    borderRadius: wp('2%'), // 2% of screen width
     alignItems: "center",
-    margin:50,
+    margin: wp('12%'), // 12% of screen width
   },
   submitText: {
     color: "white",
-    fontSize: 16,
+    fontSize: wp('4%'), // 4% of screen width
     fontWeight: "bold",
   },
-  profileImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    alignSelf: "center",
-    marginBottom: 20,
+  navbar: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: 'white',
+    width: wp('100%'), // 100% of screen width
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    paddingVertical: hp('1.5%'), // 1.5% of screen height
   },
-  profileText: {
-    color: "white",
-    fontSize: 20,
-    textAlign: "center",
+  homeimage: {
+    height: hp('6%'), // 6% of screen height
+    width: wp('10%'), // 10% of screen width
   },
-  navbar:{
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-around',
-    backgroundColor:'white',
-    width:390,
-    left:-20,
-    },
-    homeimage:{
-    height:42,
-    width:40,
-    },
-    navLabel:{
-      fontSize:10,
-      marginLeft:5,
-    },
+  navLabel: {
+    fontSize: wp('3%'), // 3% of screen width
+    marginLeft: wp('1%'), // 1% of screen width
+  },
 });
+
 export default Leaveod;

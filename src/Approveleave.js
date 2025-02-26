@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from "react-native";
-
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 // Import Logo (Fix for Spaces in Filename)
 const Logo = require("../assets/icons/jeclogo.png"); // Rename if necessary
 
 // Custom Navigation Bar (ONLY for Logo)
-const CustomNavBar = ({navigation}) => {
+const CustomNavBar = ({ navigation }) => {
   return (
     <View style={styles.navBar}>
       <Image source={Logo} style={styles.logo} />
@@ -14,8 +17,7 @@ const CustomNavBar = ({navigation}) => {
   );
 };
 
-
-const Approveleave= () => {
+const Approveleave = ({ navigation }) => {
   const [formData, setFormData] = useState({
     name: "",
     department: "",
@@ -79,109 +81,106 @@ const Approveleave= () => {
           <Text style={styles.submitButtonText}>APPROVE</Text>
         </TouchableOpacity>
       </View>
-        <View style={styles.navbaritem}>
-            <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Staff')}>
-                <Image source={require("../assets/icons/home.png")} style={styles.homeimage} />
-                <Text style={styles.navLabel}>Home</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
-                <Image source={require("../assets/icons/profile.png")} style={styles.homeimage} />
-                <Text style={styles.navLabel}>Profile</Text>
-            </TouchableOpacity>
-        </View>
+      <View style={styles.navbaritem}>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Staff')}>
+          <Image source={require("../assets/icons/home.png")} style={styles.homeimage} />
+          <Text style={styles.navLabel}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
+          <Image source={require("../assets/icons/profile.png")} style={styles.homeimage} />
+          <Text style={styles.navLabel}>Profile</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
-
-
-
-
 
 // Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#1A1E27",
-    
-   
   },
   navBar: {
     flexDirection: "row",
     backgroundColor: "white",
     borderBottomWidth: 1,
     borderBottomColor: "#333",
+    paddingVertical: hp('2%'), // 2% of screen height
   },
   logo: {
-    width: 70,
-    height: 70,
-    marginLeft: 10,
+    width: wp('18%'), // 18% of screen width
+    height: wp('18%'), // 18% of screen width (to maintain aspect ratio)
+    marginLeft: wp('3%'), // 3% of screen width
   },
   navTitle: {
-    fontSize: 18,
+    fontSize: wp('5%'), // 5% of screen width
     fontWeight: "bold",
     color: "#fff",
-    marginLeft: 10,
+    marginLeft: wp('3%'), // 3% of screen width
+    marginTop: hp('2%'), // 2% of screen height
   },
   form: {
-    marginTop: 20,
-    marginLeft:20,
-    marginRight:20,
+    marginTop: hp('2%'), // 2% of screen height
+    marginLeft: wp('5%'), // 5% of screen width
+    marginRight: wp('5%'), // 5% of screen width
   },
   label: {
     color: "#fff",
-    fontSize: 16,
-    marginBottom: 5,
-    marginTop: 20,
+    fontSize: wp('4%'), // 4% of screen width
+    marginBottom: hp('1%'), // 1% of screen height
+    marginTop: hp('2%'), // 2% of screen height
   },
   input: {
     backgroundColor: "#D3D3D3",
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 15,
+    padding: wp('4%'), // 4% of screen width
+    borderRadius: wp('2%'), // 2% of screen width
+    marginBottom: hp('2%'), // 2% of screen height
     color: "#000",
-    fontSize: 16,
+    fontSize: wp('4%'), // 4% of screen width
   },
   textArea: {
     backgroundColor: "#D3D3D3",
-    padding: 15,
-    borderRadius: 10,
-    height: 100,
+    padding: wp('4%'), // 4% of screen width
+    borderRadius: wp('2%'), // 2% of screen width
+    height: hp('15%'), // 15% of screen height
     textAlignVertical: "top",
-    marginBottom: 20,
+    marginBottom: hp('2%'), // 2% of screen height
     color: "#000",
-    fontSize: 16,
+    fontSize: wp('4%'), // 4% of screen width
   },
   submitButton: {
     backgroundColor: "#007BFF",
-    padding: 15,
-    borderRadius: 10,
-    justifyContent:'center',
-    alignSelf:'center',
+    padding: wp('4%'), // 4% of screen width
+    borderRadius: wp('2%'), // 2% of screen width
+    justifyContent: 'center',
+    alignSelf: 'center',
     alignItems: 'center',
-    width:200,
+    width: wp('50%'), // 50% of screen width
   },
   submitButtonText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: wp('4.5%'), // 4.5% of screen width
     fontWeight: "bold",
   },
-  
   navbaritem: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     backgroundColor: 'white',
-    
-    bottom:-30,
+    position: 'absolute',
+    bottom: 0,
     left: 0,
-    right:0,
+    right: 0,
+    paddingVertical: hp('1.5%'), // 1.5% of screen height
   },
   homeimage: {
-    height: 42,
-    width: 40,
+    height: hp('6%'), // 6% of screen height
+    width: wp('10%'), // 10% of screen width
   },
   navLabel: {
-    fontSize: 10,
-    marginLeft: 5,
+    fontSize: wp('3%'), // 3% of screen width
+    marginLeft: wp('1%'), // 1% of screen width
   },
 });
+
 export default Approveleave;

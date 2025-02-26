@@ -1,7 +1,11 @@
 import React from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, FlatList, StyleSheet, ScrollView } from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
-const StaffInternal = ({navigation}) => {
+const StaffInternal = ({ navigation }) => {
   const data = [
     { id: '1', date: '18-12-24', subCode: 'MA3351', subName: 'Discrete and Maths', Mark: '83' },
     { id: '2', date: '18-12-24', subCode: 'MA3351', subName: 'Discrete and Maths', Mark: '34' },
@@ -21,9 +25,11 @@ const StaffInternal = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      {/* Header with Logo */}
       <View style={styles.containerimage}>
         <Image source={require('../assets/icons/jeclogo.png')} style={styles.logo} />
       </View>
+
       {/* Header Section */}
       <View style={styles.header}>
         <Text style={styles.headerText}>CSE</Text>
@@ -33,6 +39,7 @@ const StaffInternal = ({navigation}) => {
         <Text style={styles.headerText}>B </Text>
         <Text style={styles.headerText}>03</Text>
       </View>
+
       {/* Input Section */}
       <View style={styles.inputSection}>
         <TextInput style={styles.input} placeholder="Add Title" />
@@ -49,7 +56,7 @@ const StaffInternal = ({navigation}) => {
 
       {/* Table Section */}
       <Text style={styles.tableTitle}>Model Examination-1</Text>
-      
+
       {/* Scrollable Table Container */}
       <View style={styles.tableContainer}>
         <View style={styles.table}>
@@ -71,14 +78,15 @@ const StaffInternal = ({navigation}) => {
         </View>
       </View>
 
+      {/* Bottom Navigation */}
       <View style={styles.navbar}>
         <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
           <Image source={require("../assets/icons/home.png")} style={styles.homeimage} />
-          <Text style={styles.navLabel}>Home</Text> 
+          <Text style={styles.navLabel}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Profile')}>
           <Image source={require("../assets/icons/profile.png")} style={styles.homeimage} />
-          <Text style={styles.navLabel}>Profile</Text> 
+          <Text style={styles.navLabel}>Profile</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -93,116 +101,102 @@ const styles = StyleSheet.create({
   containerimage: {
     display: 'flex',
     backgroundColor: 'white',
-    height: 70,
+    height: hp('10%'), // 10% of screen height
     justifyContent: 'flex-start',
-    top: 0,
-    left: 0,
-    right: 0,
+    paddingTop: hp('2%'), // 2% of screen height
+    paddingLeft: wp('3%'), // 3% of screen width
   },
   logo: {
     resizeMode: "contain",
-    width: 50,
-    height: 50,
+    width: wp('12%'), // 12% of screen width
+    height: wp('12%'), // 12% of screen width (to maintain aspect ratio)
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    marginBottom: -10,
-    marginTop: 20,
+    marginBottom: hp('-1%'), // -1% of screen height
+    marginTop: hp('2%'), // 2% of screen height
   },
   headerText: {
-    fontSize: 16,
+    fontSize: wp('4%'), // 4% of screen width
     fontWeight: 'bold',
     textAlign: 'center',
     backgroundColor: 'white',
-    padding: 10,
-    borderRadius: 30,
-    minWidth: 150,
+    padding: wp('2.5%'), // 2.5% of screen width
+    borderRadius: wp('7.5%'), // 7.5% of screen width
+    minWidth: wp('35%'), // 35% of screen width
   },
   inputSection: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
-    marginTop: 30,
-    width: 330,
-    marginLeft: 15,
+    marginBottom: hp('2%'), // 2% of screen height
+    marginTop: hp('3%'), // 3% of screen height
+    width: wp('90%'), // 90% of screen width
+    marginLeft: wp('3%'), // 3% of screen width
   },
   input: {
     flex: 1,
-    height: 50,
+    height: hp('6%'), // 6% of screen height
     backgroundColor: '#F0F0F0',
-    paddingHorizontal: 10,
+    paddingHorizontal: wp('3%'), // 3% of screen width
   },
   icon: {
-    marginHorizontal: 10,
+    marginHorizontal: wp('2%'), // 2% of screen width
     backgroundColor: '#FDF2C3',
-    padding: 10,
-    paddingLeft: 10,
+    padding: wp('2.5%'), // 2.5% of screen width
   },
   iconname: {
-    marginHorizontal: 10,
+    marginHorizontal: wp('2%'), // 2% of screen width
     backgroundColor: '#B4FF66',
-    padding: 10,
+    padding: wp('2.5%'), // 2.5% of screen width
   },
   iconText: {
-    height: 30,
-    width: 30,
-    color: '#000',
+    height: wp('8%'), // 8% of screen width
+    width: wp('8%'), // 8% of screen width
   },
   saveButton: {
     backgroundColor: '#115DFC',
-    padding: 15,
+    padding: wp('3%'), // 3% of screen width
   },
   saveButtonText: {
     color: '#FFF',
     fontWeight: 'bold',
+    fontSize: wp('3.5%'), // 3.5% of screen width
   },
   tableTitle: {
     color: '#FFF',
-    fontSize: 18,
+    fontSize: wp('5%'), // 5% of screen width
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: hp('1%'), // 1% of screen height
     textAlign: 'center',
   },
   tableContainer: {
-    marginBottom: 80,  // Space for the navbar
+    marginBottom: hp('10%'), // 10% of screen height (space for the navbar)
   },
   table: {
     backgroundColor: 'white',
-    padding: 10,
-    color: 'black',
-    marginLeft: 15,
-    marginRight: 15,
+    padding: wp('3%'), // 3% of screen width
+    marginLeft: wp('3%'), // 3% of screen width
+    marginRight: wp('3%'), // 3% of screen width
   },
   tableRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 5,
+    marginBottom: hp('0.5%'), // 0.5% of screen height
   },
   tableHeader: {
     borderBottomWidth: 1,
     borderBottomColor: 'black',
-    marginBottom: 10,
-  },
-  tableBody: {
-    
+    marginBottom: hp('1%'), // 1% of screen height
   },
   cell: {
     color: 'black',
     flex: 1,
     textAlign: 'center',
-    fontSize: 12,
+    fontSize: wp('3%'), // 3% of screen width
     borderBottomWidth: 1,
     borderBottomColor: 'black',
-    padding:5,
-  },
-  cellin: {
-    color: 'black',
-    flex: 1,
-    textAlign: 'center',
-    fontSize: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: 'black',
+    padding: wp('1%'), // 1% of screen width
   },
   headerCell: {
     fontWeight: 'bold',
@@ -211,16 +205,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     backgroundColor: 'white',
-    bottom:-30,
+    position: 'absolute',
+    bottom: 0,
     left: 0,
-    right:0,
+    right: 0,
+    paddingVertical: hp('1.5%'), // 1.5% of screen height
   },
   homeimage: {
-    height: 42,
-    width: 40,
+    height: hp('6%'), // 6% of screen height
+    width: wp('10%'), // 10% of screen width
   },
   navLabel: {
-    fontSize: 10,
+    fontSize: wp('3%'), // 3% of screen width
   },
 });
 

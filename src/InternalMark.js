@@ -1,5 +1,9 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const examData = [
   { id: '1', date: '29-01-25', subCode: 'MA3351', subName: 'DISCRETE AND MATHS', Mark: '83' },
@@ -21,10 +25,10 @@ const InternalMark = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      {/* Header with Logo */}
       <View style={styles.containerimage}>
         <Image source={require('../assets/icons/jeclogo.png')} style={styles.logo} />
       </View>
-      
 
       {/* Scrollable content */}
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -70,70 +74,68 @@ const styles = StyleSheet.create({
   containerimage: {
     display: 'flex',
     backgroundColor: 'white',
-    height: 70,
+    height: hp('10%'), // 10% of screen height
     justifyContent: 'flex-start',
-    top: 0,
-    left: 0,
-    right: 0,
+    alignItems: 'center',
+    paddingTop: hp('2%'), // 2% of screen height
   },
   logo: {
     resizeMode: "contain",
-    width: 50,
-    height: 50,
+    width: wp('12%'), // 12% of screen width
+    height: wp('12%'), // 12% of screen width (to maintain aspect ratio)
   },
   header: {
-    fontSize: 20,
+    fontSize: wp('6%'), // 6% of screen width
     color: '#ffffff',
     fontWeight: 'bold',
-    marginVertical: 10,
+    marginVertical: hp('2%'), // 2% of screen height
     textAlign: 'center',
-    marginTop: 40,
+    marginTop: hp('5%'), // 5% of screen height
   },
   tableHeader: {
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: '#374151',
-    padding: 5,
-    color: 'black',
-    backgroundColor:'white',
-    marginHorizontal:20,
+    padding: wp('2%'), // 2% of screen width
+    backgroundColor: 'white',
+    marginHorizontal: wp('5%'), // 5% of screen width
   },
   row: {
     display: 'flex',
     flexDirection: 'row',
-    paddingVertical: 10,
+    paddingVertical: hp('1.5%'), // 1.5% of screen height
     borderBottomWidth: 1,
     borderBottomColor: '#374151',
-    backgroundColor:'white',
-    marginHorizontal:20,
+    backgroundColor: 'white',
+    marginHorizontal: wp('5%'), // 5% of screen width
   },
   cell: {
     flex: 1,
-    fontSize: 14,
-    color: '#ffffff',
+    fontSize: wp('3.5%'), // 3.5% of screen width
+    color: 'black',
     textAlign: 'center',
-    color:'black',
   },
   scrollContent: {
-    paddingBottom: 100, // Adding space to avoid overlap with navbar
+    paddingBottom: hp('15%'), // 15% of screen height (to avoid overlap with navbar)
   },
   navbar: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
     backgroundColor: 'white',
-    width: '100%',
+    width: wp('100%'), // 100% of screen width
     position: 'absolute',
     bottom: 0,
     left: 0,
+    paddingVertical: hp('1.5%'), // 1.5% of screen height
   },
   homeimage: {
-    height: 42,
-    width: 40,
+    height: hp('6%'), // 6% of screen height
+    width: wp('10%'), // 10% of screen width
   },
   navLabel: {
-    fontSize: 10,
-    marginLeft: 5,
+    fontSize: wp('3%'), // 3% of screen width
+    marginLeft: wp('1%'), // 1% of screen width
   },
 });
 

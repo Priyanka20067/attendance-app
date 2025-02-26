@@ -1,13 +1,17 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
-const Profile = ({navigation}) => {
+const Profile = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.containerimage}>
         <Image
-          source={require("../assets/icons/jeclogo.png")} 
+          source={require("../assets/icons/jeclogo.png")}
           style={styles.logo}
         />
       </View>
@@ -17,9 +21,9 @@ const Profile = ({navigation}) => {
         <View style={styles.Row}>
           <Text style={styles.title}>PROFILE</Text>
           <Image
-            source={require("../assets/icons/Profileimage.png")} 
+            source={require("../assets/icons/Profileimage.png")}
             style={styles.illustration}
-           />
+          />
         </View>
         <View style={styles.infoContainer}>
           <Text style={styles.infoText}>Name: Nisha</Text>
@@ -34,16 +38,17 @@ const Profile = ({navigation}) => {
         </View>
       </View>
 
-       <View style={styles.navbar}>
-                               <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
-                                 <Image source={require("../assets/icons/home.png")} style={styles.homeimage}/>
-                                 <Text style={styles.navLabel}>Home</Text> 
-                               </TouchableOpacity>
-                               <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Profile')}>
-                                 <Image source={require("../assets/icons/profile.png")} style={styles.homeimage}/>
-                                 <Text style={styles.navLabel}>Profile</Text> 
-                               </TouchableOpacity>
-         </View>
+      {/* Navbar/Footer */}
+      <View style={styles.navbar}>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
+          <Image source={require("../assets/icons/home.png")} style={styles.homeimage} />
+          <Text style={styles.navLabel}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Profile')}>
+          <Image source={require("../assets/icons/profile.png")} style={styles.homeimage} />
+          <Text style={styles.navLabel}>Profile</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -52,75 +57,70 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#12172B",
-    padding: 10,
+    padding: wp('2.5%'), // 2.5% of screen width
   },
-  containerimage:{
-    display:'flex',
-    backgroundColor:'white',
-    height:70,
-    justifyContent:'flex-start',
-    width:359,
-    top:-10,
-    left:-10,
-    
+  containerimage: {
+    display: 'flex',
+    backgroundColor: 'white',
+    height: hp('10%'), // 10% of screen height
+    justifyContent: 'flex-start',
+    width: wp('100%'), // 100% of screen width
+    paddingTop: hp('2%'), // 2% of screen height
+    paddingLeft: wp('3%'), // 3% of screen width
   },
-  logo:{
-    marginTop:10,
-    marginLeft:10,
-    width:60,
-    height:60,
+  logo: {
+    width: wp('15%'), // 15% of screen width
+    height: wp('15%'), // 15% of screen width (to maintain aspect ratio)
   },
   profileSection: {
     flex: 1,
     alignItems: "center",
   },
-  Row:{
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-between',
-    alignContent:'space-between',
-    
+  Row: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: wp('90%'), // 90% of screen width
+    marginTop: hp('3%'), // 3% of screen height
   },
   title: {
-    fontSize: 38,
+    fontSize: wp('10%'), // 10% of screen width
     color: "#FFF",
     fontWeight: "bold",
-    marginBottom: 20,
-    marginTop:30,
   },
   illustration: {
-    width: 150,
-    height: 150,
-    marginLeft:20,
-    marginBottom: 20,
+    width: wp('35%'), // 35% of screen width
+    height: wp('35%'), // 35% of screen width (to maintain aspect ratio)
   },
   infoContainer: {
-    width: "100%",
-    paddingHorizontal: 20,
+    width: wp('90%'), // 90% of screen width
+    paddingHorizontal: wp('5%'), // 5% of screen width
+    marginTop: hp('3%'), // 3% of screen height
   },
   infoText: {
     color: "#FFF",
-    fontSize: 16,
-    marginBottom: 10,
+    fontSize: wp('4%'), // 4% of screen width
+    marginBottom: hp('1.5%'), // 1.5% of screen height
   },
-  navbar:{
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-around',
-    backgroundColor:'white',
-    marginTop:247,
-    width:355,
-  left:0,
-    bottom:0,
-    right:-10,
-    },
-    homeimage:{
-    height:42,
-    width:40,
-    },
-    navLabel:{
-      fontSize:10,
-    },
+  navbar: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: 'white',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingVertical: hp('1.5%'), // 1.5% of screen height
+  },
+  homeimage: {
+    height: hp('6%'), // 6% of screen height
+    width: wp('10%'), // 10% of screen width
+  },
+  navLabel: {
+    fontSize: wp('3%'), // 3% of screen width
+  },
 });
 
 export default Profile;

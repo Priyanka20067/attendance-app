@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
-const StaffAttendance = ({navigation}) => {
+const StaffAttendance = ({ navigation }) => {
   // Sample data for the table
   const [attendanceData, setAttendanceData] = useState(
     new Array(10).fill(null).map(() => ({ date: "18-12-2024", present: null }))
@@ -19,20 +23,21 @@ const StaffAttendance = ({navigation}) => {
       {/* Navbar with Logo */}
       <View style={styles.navbar}>
         <Image
-          source={require("../assets/icons/jeclogo.png")} 
+          source={require("../assets/icons/jeclogo.png")}
           style={styles.logo}
         />
       </View>
-{/* Header Section */}
-       <View style={styles.headerMatrix}>
-             <View style={styles.header}>
-               <Text style={styles.headerText}>CSE</Text>
-               <Text style={styles.headerText}>2 YEAR</Text>
-             </View>
-             <View style={styles.header}>
-               <Text style={styles.headerText}>B </Text>
-               <Text style={styles.headerText}>03</Text>
-             </View>
+
+      {/* Header Section */}
+      <View style={styles.headerMatrix}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>CSE</Text>
+          <Text style={styles.headerText}>2 YEAR</Text>
+        </View>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>B </Text>
+          <Text style={styles.headerText}>03</Text>
+        </View>
       </View>
 
       {/* Table */}
@@ -54,13 +59,13 @@ const StaffAttendance = ({navigation}) => {
                   style={[styles.tickBox, item.present === true && styles.activeTickBox]}
                   onPress={() => toggleAttendance(index, true)}
                 >
-                  <Icon name="check" size={20} color="green" />
+                  <Icon name="check" size={wp('5%')} color="green" />
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={[styles.crossBox, item.present === false && styles.activeCrossBox]}
                   onPress={() => toggleAttendance(index, false)}
                 >
-                  <Icon name="close" size={20} color="red" />
+                  <Icon name="close" size={wp('5%')} color="red" />
                 </TouchableOpacity>
               </View>
             </View>
@@ -70,15 +75,15 @@ const StaffAttendance = ({navigation}) => {
 
       {/* Bottom Navigation */}
       <View style={styles.navbarItem}>
-                                     <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
-                                       <Image source={require("../assets/icons/home.png")} style={styles.homeimage}/>
-                                       <Text style={styles.navLabel}>Home</Text> 
-                                     </TouchableOpacity>
-                                     <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Profile')}>
-                                       <Image source={require("../assets/icons/profile.png")} style={styles.homeimage}/>
-                                       <Text style={styles.navLabel}>Profile</Text> 
-                                     </TouchableOpacity>
-               </View>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
+          <Image source={require("../assets/icons/home.png")} style={styles.homeimage} />
+          <Text style={styles.navLabel}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Profile')}>
+          <Image source={require("../assets/icons/profile.png")} style={styles.homeimage} />
+          <Text style={styles.navLabel}>Profile</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -92,48 +97,48 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#fff",
-    paddingVertical: 10,
-    paddingHorizontal: 10,
+    paddingVertical: hp('1.5%'), // 1.5% of screen height
+    paddingHorizontal: wp('3%'), // 3% of screen width
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
   },
   logo: {
-    width: 50,
-    height: 50,
+    width: wp('12%'), // 12% of screen width
+    height: wp('12%'), // 12% of screen width (to maintain aspect ratio)
     resizeMode: "contain",
   },
   headerMatrix: {
-    marginVertical: 10,
+    marginVertical: hp('2%'), // 2% of screen height
     alignItems: "center",
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    marginTop: 20,
+    marginTop: hp('2%'), // 2% of screen height
   },
   headerText: {
-    fontSize: 16,
+    fontSize: wp('4%'), // 4% of screen width
     fontWeight: 'bold',
     textAlign: 'center',
     backgroundColor: 'white',
-    padding: 10,
-    borderRadius: 30,
-    minWidth: 150,
-    marginLeft:10,
+    padding: wp('2.5%'), // 2.5% of screen width
+    borderRadius: wp('7.5%'), // 7.5% of screen width
+    minWidth: wp('35%'), // 35% of screen width
+    marginLeft: wp('2%'), // 2% of screen width
   },
   tableContainer: {
     flex: 1,
-    marginHorizontal: 10,
-    marginTop: 10,
+    marginHorizontal: wp('3%'), // 3% of screen width
+    marginTop: hp('2%'), // 2% of screen height
     backgroundColor: "#fff",
-    borderRadius: 8,
+    borderRadius: wp('2%'), // 2% of screen width
     overflow: "hidden",
     elevation: 2,
   },
   tableHeader: {
     flexDirection: "row",
     backgroundColor: "white",
-    paddingVertical: 10,
+    paddingVertical: hp('1.5%'), // 1.5% of screen height
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
   },
@@ -153,9 +158,10 @@ const styles = StyleSheet.create({
   },
   tableRow: {
     flexDirection: "row",
-    paddingVertical: 10,
+    paddingVertical: hp('1.5%'), // 1.5% of screen height
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
+   
   },
   tableRowText: {
     textAlign: "center",
@@ -167,24 +173,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   tickBox: {
-    width: 30,
-    height: 30,
+    width: wp('8%'), // 8% of screen width
+    height: wp('8%'), // 8% of screen width
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
     borderColor: "green",
-    borderRadius: 4,
-    marginHorizontal: 5,
+    borderRadius: wp('1%'), // 1% of screen width
+    marginHorizontal: wp('1%'), // 1% of screen width
   },
   crossBox: {
-    width: 30,
-    height: 30,
+    width: wp('8%'), // 8% of screen width
+    height: wp('8%'), // 8% of screen width
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
     borderColor: "red",
-    borderRadius: 4,
-    marginHorizontal: 5,
+    borderRadius: wp('1%'), // 1% of screen width
+    marginHorizontal: wp('1%'), // 1% of screen width
   },
   activeTickBox: {
     backgroundColor: "#d4f4d4",
@@ -192,24 +198,27 @@ const styles = StyleSheet.create({
   activeCrossBox: {
     backgroundColor: "#f4d4d4",
   },
-  navbarItem:{
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-around',
-    backgroundColor:'white',
-    marginTop:20,
-    width:355,
-  left:0,
-    bottom:0,
-    right:-10,
-    },
-    homeimage:{
-    height:42,
-    width:40,
-    },
-    navLabel:{
-      fontSize:10,
-    },
+  navbarItem: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: 'white',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingVertical: hp('1.5%'), // 1.5% of screen height
+    
+    
+  },
+  homeimage: {
+    height: hp('6%'), // 6% of screen height
+    width: wp('10%'), // 10% of screen width
+  },
+  navLabel: {
+    fontSize: wp('3%'), // 3% of screen width
+    marginLeft: wp('1%'), // 1% of screen width
+  },
 });
 
 export default StaffAttendance;

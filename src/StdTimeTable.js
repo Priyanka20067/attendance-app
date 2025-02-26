@@ -1,6 +1,10 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 
+// Get screen dimensions
+const { width, height } = Dimensions.get('window');
+
+// Exam data
 const examData = [
   { id: '1', date: '29-01-25', subCode: 'MA3351', subName: 'DISCRETE AND MATHS', time: '8.30AM-12.30PM' },
   { id: '2', date: '30-01-25', subCode: 'CS3391', subName: 'OOPS', time: '8.30AM-12.30PM' },
@@ -21,28 +25,30 @@ const StdTimeTable = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      {/* Header Section */}
       <View style={styles.containerimage}>
         <Image source={require('../assets/icons/jeclogo.png')} style={styles.logo} />
       </View>
-      
 
-      {/* Scrollable content */}
+      {/* Scrollable Content */}
       <ScrollView contentContainerStyle={styles.scrollContent}>
+        {/* Model Examination 1 */}
         <Text style={styles.header}>MODEL EXAMINATION-1</Text>
         <View style={styles.tableHeader}>
-          <Text style={styles.cell}>DATE</Text>
-          <Text style={styles.cell}>SUB CODE</Text>
-          <Text style={styles.cell}>SUB NAME</Text>
-          <Text style={styles.cell}>TIME</Text>
+          <Text style={styles.headerCell}>DATE</Text>
+          <Text style={styles.headerCell}>SUB CODE</Text>
+          <Text style={styles.headerCell}>SUB NAME</Text>
+          <Text style={styles.headerCell}>TIME</Text>
         </View>
         <FlatList data={examData} renderItem={renderRow} keyExtractor={(item) => item.id} />
 
+        {/* Model Examination 2 */}
         <Text style={styles.header}>MODEL EXAMINATION-2</Text>
         <View style={styles.tableHeader}>
-          <Text style={styles.cell}>DATE</Text>
-          <Text style={styles.cell}>SUB CODE</Text>
-          <Text style={styles.cell}>SUB NAME</Text>
-          <Text style={styles.cell}>TIME</Text>
+          <Text style={styles.headerCell}>DATE</Text>
+          <Text style={styles.headerCell}>SUB CODE</Text>
+          <Text style={styles.headerCell}>SUB NAME</Text>
+          <Text style={styles.headerCell}>TIME</Text>
         </View>
         <FlatList data={examData} renderItem={renderRow} keyExtractor={(item) => item.id} />
       </ScrollView>
@@ -53,7 +59,7 @@ const StdTimeTable = ({ navigation }) => {
           <Image source={require("../assets/icons/home.png")} style={styles.homeimage} />
           <Text style={styles.navLabel}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Profile')}>
           <Image source={require("../assets/icons/profile.png")} style={styles.homeimage} />
           <Text style={styles.navLabel}>Profile</Text>
         </TouchableOpacity>
@@ -62,6 +68,7 @@ const StdTimeTable = ({ navigation }) => {
   );
 };
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -70,53 +77,60 @@ const styles = StyleSheet.create({
   containerimage: {
     display: 'flex',
     backgroundColor: 'white',
-    height: 70,
+    height: height * 0.1, // 10% of screen height
     justifyContent: 'flex-start',
     top: 0,
     left: 0,
     right: 0,
   },
   logo: {
-    resizeMode: "contain",
-    width: 50,
-    height: 50,
+    resizeMode: 'contain',
+    width: width * 0.1, // 10% of screen width
+    height: height * 0.1, // 10% of screen height
   },
   header: {
-    fontSize: 20,
+    fontSize: width * 0.06, // 6% of screen width
     color: '#ffffff',
     fontWeight: 'bold',
-    marginVertical: 10,
+    marginVertical: height * 0.02, // 2% of screen height
     textAlign: 'center',
-    marginTop: 40,
+    marginTop: height * 0.05, // 5% of screen height
   },
   tableHeader: {
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: '#374151',
-    padding: 5,
-    backgroundColor:'white',
-   marginHorizontal:10,
+    padding: width * 0.02, // 2% of screen width
+    backgroundColor: '#ffffff',
+    marginHorizontal: width * 0.03, // 3% of screen width
+    borderRadius: 5,
+  },
+  headerCell: {
+    flex: 1,
+    fontSize: width * 0.04, // 4% of screen width
+    fontWeight: 'bold',
+    color: '#000000',
+    textAlign: 'center',
   },
   row: {
-    display: 'flex',
     flexDirection: 'row',
-    paddingVertical: 10,
+    paddingVertical: height * 0.015, // 1.5% of screen height
     borderBottomWidth: 1,
     borderBottomColor: '#374151',
-    backgroundColor:'white',
-  marginHorizontal:10,
+    backgroundColor: '#ffffff',
+    marginHorizontal: width * 0.03, // 3% of screen width
+    borderRadius: 5,
   },
   cell: {
     flex: 1,
-    fontSize: 12,
-    color:'black',
+    fontSize: width * 0.035, // 3.5% of screen width
+    color: '#000000',
     textAlign: 'center',
   },
   scrollContent: {
-    paddingBottom: 100, 
+    paddingBottom: height * 0.15, // 15% of screen height (space for navbar)
   },
   navbar: {
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
     backgroundColor: 'white',
@@ -124,14 +138,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     left: 0,
+    paddingVertical: height * 0.015, // 1.5% of screen height
   },
   homeimage: {
-    height: 42,
-    width: 40,
+    height: height * 0.05, // 5% of screen height
+    width: width * 0.1, // 10% of screen width
   },
   navLabel: {
-    fontSize: 10,
-    marginLeft: 5,
+    fontSize: width * 0.03, // 3% of screen width
+    marginLeft: width * 0.01, // 1% of screen width
   },
 });
 

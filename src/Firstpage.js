@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { Image, View, StyleSheet } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const Firstpage = () => {
   const navigation = useNavigation();
@@ -33,9 +37,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    width: 164,
-    height: 152,
-    borderRadius: 50,
+    width: wp('40%'), // 40% of screen width
+    height: wp('40%'), // 40% of screen width (to maintain aspect ratio)
+    borderRadius: wp('20%'), // 20% of screen width (half of width/height for a circle)
   },
 });
 

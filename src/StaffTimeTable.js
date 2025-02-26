@@ -1,7 +1,10 @@
 import React from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity, FlatList, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity, FlatList, StyleSheet, ScrollView, Dimensions } from 'react-native';
 
-const StaffTimeTable = ({navigation}) => {
+// Get screen dimensions
+const { width, height } = Dimensions.get('window');
+
+const StaffTimeTable = ({ navigation }) => {
   const data = [
     { id: '1', date: '18-12-24', subCode: 'MA3351', subName: 'Discrete and Maths', time: '8:30AM-12:30PM' },
     { id: '2', date: '18-12-24', subCode: 'MA3351', subName: 'Discrete and Maths', time: '8:30AM-12:30PM' },
@@ -23,10 +26,12 @@ const StaffTimeTable = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      {/* Header Section */}
       <View style={styles.containerimage}>
         <Image source={require('../assets/icons/jeclogo.png')} style={styles.logo} />
       </View>
-      {/* Header Section */}
+
+      {/* Header Text */}
       <View style={styles.header}>
         <Text style={styles.headerText}>CSE</Text>
         <Text style={styles.headerText}>2 YEAR</Text>
@@ -35,9 +40,10 @@ const StaffTimeTable = ({navigation}) => {
         <Text style={styles.headerText}>B </Text>
         <Text style={styles.headerText}>03</Text>
       </View>
+
       {/* Input Section */}
       <View style={styles.inputSection}>
-        <TextInput style={styles.input} placeholder="Add Title" />
+        <TextInput style={styles.input} placeholder="Add Title" placeholderTextColor="#999" />
         <TouchableOpacity style={styles.icon}>
           <Image source={require('../assets/icons/file-folder.png')} style={styles.iconText} />
         </TouchableOpacity>
@@ -51,7 +57,7 @@ const StaffTimeTable = ({navigation}) => {
 
       {/* Table Section */}
       <Text style={styles.tableTitle}>Model Examination-1</Text>
-      
+
       {/* Scrollable Table Container */}
       <View style={styles.tableContainer}>
         <View style={styles.table}>
@@ -73,20 +79,22 @@ const StaffTimeTable = ({navigation}) => {
         </View>
       </View>
 
+      {/* Navbar/Footer */}
       <View style={styles.navbar}>
         <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
           <Image source={require("../assets/icons/home.png")} style={styles.homeimage} />
-          <Text style={styles.navLabel}>Home</Text> 
+          <Text style={styles.navLabel}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Profile')}>
           <Image source={require("../assets/icons/profile.png")} style={styles.homeimage} />
-          <Text style={styles.navLabel}>Profile</Text> 
+          <Text style={styles.navLabel}>Profile</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -95,65 +103,64 @@ const styles = StyleSheet.create({
   containerimage: {
     display: 'flex',
     backgroundColor: 'white',
-    height: 70,
+    height: height * 0.1, // 10% of screen height
     justifyContent: 'flex-start',
     top: 0,
     left: 0,
     right: 0,
   },
   logo: {
-    resizeMode: "contain",
-    width: 50,
-    height: 50,
+    resizeMode: 'contain',
+    width: width * 0.1, // 10% of screen width
+    height: height * 0.1, // 10% of screen height
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     marginBottom: -10,
-    marginTop: 20,
+    marginTop: height * 0.02, // 2% of screen height
   },
   headerText: {
-    fontSize: 16,
+    fontSize: width * 0.04, // 4% of screen width
     fontWeight: 'bold',
     textAlign: 'center',
     backgroundColor: 'white',
-    padding: 10,
+    padding: width * 0.02, // 2% of screen width
     borderRadius: 30,
-    minWidth: 150,
+    minWidth: width * 0.35, // 35% of screen width
   },
   inputSection: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
-    marginTop: 30,
-    width: 330,
-    marginLeft: 15,
+    marginBottom: height * 0.02, // 2% of screen height
+    marginTop: height * 0.03, // 3% of screen height
+    width: width * 0.9, // 90% of screen width
+    marginLeft: width * 0.05, // 5% of screen width
   },
   input: {
     flex: 1,
-    height: 50,
+    height: height * 0.06, // 6% of screen height
     backgroundColor: '#F0F0F0',
-    paddingHorizontal: 10,
+    paddingHorizontal: width * 0.02, // 2% of screen width
   },
   icon: {
-    marginHorizontal: 10,
+    marginHorizontal: width * 0.02, // 2% of screen width
     backgroundColor: '#FDF2C3',
-    padding: 10,
-    paddingLeft: 10,
+    padding: width * 0.02, // 2% of screen width
   },
   iconname: {
-    marginHorizontal: 10,
+    marginHorizontal: width * 0.02, // 2% of screen width
     backgroundColor: '#B4FF66',
-    padding: 10,
+    padding: width * 0.02, // 2% of screen width
   },
   iconText: {
-    height: 30,
-    width: 30,
+    height: height * 0.04, // 4% of screen height
+    width: width * 0.08, // 8% of screen width
     color: '#000',
   },
   saveButton: {
     backgroundColor: '#115DFC',
-    padding: 15,
+    padding: width * 0.03, // 3% of screen width
   },
   saveButtonText: {
     color: '#FFF',
@@ -161,50 +168,39 @@ const styles = StyleSheet.create({
   },
   tableTitle: {
     color: '#FFF',
-    fontSize: 18,
+    fontSize: width * 0.05, // 5% of screen width
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: height * 0.01, // 1% of screen height
     textAlign: 'center',
   },
   tableContainer: {
-    marginBottom: 80,  // Space for the navbar
+    marginBottom: height * 0.1, // 10% of screen height (Space for the navbar)
   },
   table: {
     backgroundColor: 'white',
-    padding: 10,
+    padding: width * 0.02, // 2% of screen width
     color: 'black',
-    marginLeft: 15,
-    marginRight: 15,
+    marginLeft: width * 0.05, // 5% of screen width
+    marginRight: width * 0.05, // 5% of screen width
   },
   tableRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 5,
+    marginBottom: height * 0.01, // 1% of screen height
   },
   tableHeader: {
     borderBottomWidth: 1,
     borderBottomColor: 'black',
-    marginBottom: 10,
-  },
-  tableBody: {
-    
+    marginBottom: height * 0.01, // 1% of screen height
   },
   cell: {
     color: 'black',
     flex: 1,
     textAlign: 'center',
-    fontSize: 12,
+    fontSize: width * 0.035, // 3.5% of screen width
     borderBottomWidth: 1,
     borderBottomColor: 'black',
-    padding:5,
-  },
-  cellin: {
-    color: 'black',
-    flex: 1,
-    textAlign: 'center',
-    fontSize: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: 'black',
+    padding: width * 0.01, // 1% of screen width
   },
   headerCell: {
     fontWeight: 'bold',
@@ -213,16 +209,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     backgroundColor: 'white',
-    bottom:15,
+    position: 'absolute',
+    bottom: 0,
     left: 0,
-    right:0,
+    right: 0,
+    paddingVertical: height * 0.015, // 1.5% of screen height
   },
   homeimage: {
-    height: 42,
-    width: 40,
+    height: height * 0.06, // 6% of screen height
+    width: width * 0.1, // 10% of screen width
   },
   navLabel: {
-    fontSize: 10,
+    fontSize: width * 0.03, // 3% of screen width
   },
 });
 

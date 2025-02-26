@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Dimensions } from 'react-native';
 import { Button } from 'react-native-paper';
 import * as ImagePicker from 'react-native-image-picker';
 
-const AddPost = ({navigation}) => {
+// Get screen dimensions
+const { width, height } = Dimensions.get('window');
+
+const AddPost = ({ navigation }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
@@ -19,18 +22,16 @@ const AddPost = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerimg}> 
-              <Image
-                source={require("../assets/icons/jeclogo.png")}
-                style={styles.logo}
-              />
-              <Image
-                source={require("../assets/icons/notifications.png")}
-                style={styles.logonot}
-              />
-              </View>
-      <Text style={styles.header}>UPDATE ANOUNCEMENT</Text>
+      {/* Header Section */}
+      <View style={styles.headerimg}>
+        <Image source={require("../assets/icons/jeclogo.png")} style={styles.logo} />
+        <Image source={require("../assets/icons/notifications.png")} style={styles.logonot} />
+      </View>
 
+      {/* Header Text */}
+      <Text style={styles.header}>UPDATE ANNOUNCEMENT</Text>
+
+      {/* Title Input */}
       <Text style={styles.label}>TITLE :</Text>
       <TextInput
         style={styles.input}
@@ -40,6 +41,7 @@ const AddPost = ({navigation}) => {
         onChangeText={setTitle}
       />
 
+      {/* Content Input */}
       <Text style={styles.label}>CONTENT :</Text>
       <TextInput
         style={[styles.input, styles.textArea]}
@@ -50,6 +52,7 @@ const AddPost = ({navigation}) => {
         multiline
       />
 
+      {/* Image Upload Section */}
       <Text style={styles.label}>UPLOAD :</Text>
       <TouchableOpacity style={styles.uploadBox} onPress={selectImage}>
         {image ? (
@@ -58,122 +61,123 @@ const AddPost = ({navigation}) => {
           <Text style={styles.plusIcon}>+</Text>
         )}
       </TouchableOpacity>
-      <View  style={styles.submitcenter}>
-      <Button mode="contained" style={styles.submitButton} onPress={() => alert('Post Submitted!')}>
-        SUBMIT
-      </Button>
+
+      {/* Submit Button */}
+      <View style={styles.submitcenter}>
+        <Button mode="contained" style={styles.submitButton} onPress={() => alert('Post Submitted!')}>
+          SUBMIT
+        </Button>
       </View>
+
       {/* Navbar/Footer */}
-            <View style={styles.navbar}>
-              <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Staff')}>
-                <Image source={require("../assets/icons/home.png")} style={styles.homeimage} />
-                <Text style={styles.navLabel}>Home</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
-                <Image source={require("../assets/icons/profile.png")} style={styles.homeimage} />
-                <Text style={styles.navLabel}>Profile</Text>
-              </TouchableOpacity>
-            </View>
+      <View style={styles.navbar}>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Staff')}>
+          <Image source={require("../assets/icons/home.png")} style={styles.homeimage} />
+          <Text style={styles.navLabel}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Profile')}>
+          <Image source={require("../assets/icons/profile.png")} style={styles.homeimage} />
+          <Text style={styles.navLabel}>Profile</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
-export default AddPost;
+// Styles
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#0D192F',
-      
-    },
-    header: {
-      fontSize: 22,
-      fontWeight: 'bold',
-      color: 'white',
-      textAlign: 'center',
-      marginVertical:15,
-    },
-    headerimg:{
-    display:'flex',
-    flexDirection:'row',
-   justifyContent:'space-between',
-   alignItems:'center',
-   backgroundColor:'white',
-   padding:10,
+  container: {
+    flex: 1,
+    backgroundColor: '#0D192F',
+  },
+  header: {
+    fontSize: width * 0.06, // 6% of screen width
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    marginVertical: height * 0.02, // 2% of screen height
+  },
+  headerimg: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    padding: width * 0.03, // 3% of screen width
   },
   logo: {
-    width: 60,
-    height: 60,
+    width: width * 0.15, // 15% of screen width
+    height: width * 0.15, // 15% of screen width
     borderRadius: 50,
-    
   },
-  logonot:{
-    width:30,
-    height:30,
+  logonot: {
+    width: width * 0.08, // 8% of screen width
+    height: width * 0.08, // 8% of screen width
   },
-    label: {
-      fontSize: 16,
-      color: 'white',
-      marginBottom: 5,
-      margin:20,
-    
-    },
-    input: {
-      backgroundColor: 'white',
-      borderRadius: 10,
-      padding: 10,
-      fontSize: 16,
-      marginBottom: 15,
-      margin:20,
-    
-    },
-    textArea: {
-      height: 100,
-      textAlignVertical: 'top',
-    },
-    uploadBox: {
-      backgroundColor: '#E0E0E0',
-      height: 110,
-      borderRadius: 10,
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginBottom: 20,
-      margin:20,
-    
-    },
-    plusIcon: {
-      fontSize: 30,
-      color: '#666',
-    },
-    uploadImage: {
-      width: '100%',
-      height: '100%',
-      borderRadius: 5,
-    },
-    submitcenter:{
-      justifyContent:'center',
-      alignSelf:'center',
-    },
-    submitButton: {
-      backgroundColor: '#1E88E5',
-      paddingVertical: 5,
-      width:200,
-      alignItems:'center',
-      borderRadius:5,
-    },
-    navbar: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        backgroundColor: 'white',
-        bottom: -18,
-        left: 0,
-        right:0,
-      },
-      homeimage: {
-        height: 42,
-        width: 40,
-      },
-      navLabel: {
-        fontSize: 10,
-        marginLeft: 5,
-      },
-  });
+  label: {
+    fontSize: width * 0.04, // 4% of screen width
+    color: 'white',
+    marginBottom: height * 0.01, // 1% of screen height
+    marginHorizontal: width * 0.05, // 5% of screen width
+  },
+  input: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: width * 0.03, // 3% of screen width
+    fontSize: width * 0.04, // 4% of screen width
+    marginBottom: height * 0.02, // 2% of screen height
+    marginHorizontal: width * 0.05, // 5% of screen width
+  },
+  textArea: {
+    height: height * 0.15, // 15% of screen height
+    textAlignVertical: 'top',
+  },
+  uploadBox: {
+    backgroundColor: '#E0E0E0',
+    height: height * 0.15, // 15% of screen height
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: height * 0.02, // 2% of screen height
+    marginHorizontal: width * 0.05, // 5% of screen width
+  },
+  plusIcon: {
+    fontSize: width * 0.08, // 8% of screen width
+    color: '#666',
+  },
+  uploadImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 5,
+  },
+  submitcenter: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+  submitButton: {
+    backgroundColor: '#1E88E5',
+    paddingVertical: height * 0.015, // 1.5% of screen height
+    width: width * 0.5, // 50% of screen width
+    borderRadius: 5,
+  },
+  navbar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: 'white',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingVertical: height * 0.015, // 1.5% of screen height
+  },
+  homeimage: {
+    height: height * 0.05, // 5% of screen height
+    width: width * 0.1, // 10% of screen width
+  },
+  navLabel: {
+    fontSize: width * 0.03, // 3% of screen width
+    marginLeft: width * 0.01, // 1% of screen width
+  },
+});
+
+export default AddPost;

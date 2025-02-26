@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; 
+import { Ionicons } from "@expo/vector-icons";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
-const Post = ({navigation}) => {
+const Post = ({ navigation }) => {
   const [posts, setPosts] = useState([
     {
       id: "1",
@@ -37,19 +41,19 @@ const Post = ({navigation}) => {
 
       {/* PROFILE CARD */}
       <View style={styles.profileCard}>
-        <Image source={require('../assets/icons/download.png')} style={styles.profile}/>
+        <Image source={require('../assets/icons/download.png')} style={styles.profile} />
         <View style={styles.profileInfo}>
           <Text style={styles.name}>A.DIANA</Text>
           <Text style={styles.letter}>B.E. COMPUTER SCIENCE AND ENGINEERING</Text>
           <Text style={styles.letter}>JAYA ENGINEERING COLLEGE</Text>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.actionButton} onPress={()=>navigation.navigate('')}>
+            <TouchableOpacity style={styles.actionButton} onPress={() => navigation.navigate('')}>
               <Text style={styles.buttonText}>Edit</Text>
-              <Ionicons name="pencil" size={14} color="white" />
+              <Ionicons name="pencil" size={wp('3.5%')} color="white" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.actionButtonpost} onPress={()=>navigation.navigate('AddPost')}>
+            <TouchableOpacity style={styles.actionButtonpost} onPress={() => navigation.navigate('AddPost')}>
               <Text style={styles.buttonText}>Add Post</Text>
-              <Ionicons name="add-circle" size={14} color="white" />
+              <Ionicons name="add-circle" size={wp('3.5%')} color="white" />
             </TouchableOpacity>
           </View>
         </View>
@@ -70,20 +74,20 @@ const Post = ({navigation}) => {
             </Text>
             <View style={styles.actionRow}>
               <TouchableOpacity onPress={() => handleLike(item.id)} style={styles.iconButton}>
-                <Ionicons name="heart" size={20} color={item.liked ? "red" : "white"} />
+                <Ionicons name="heart" size={wp('5%')} color={item.liked ? "red" : "white"} />
                 <Text style={styles.iconText}>{item.likes}</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => handleComment(item.id)} style={styles.iconButton}>
-                <Ionicons name="chatbubble-outline" size={20} color="white" />
+                <Ionicons name="chatbubble-outline" size={wp('5%')} color="white" />
                 <Text style={styles.iconText}>{item.comments}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.iconButton}>
-                <Ionicons name="share-outline" size={20} color="white" /> 
-                <Text style={styles.iconText}> share </Text> 
+                <Ionicons name="share-outline" size={wp('5%')} color="white" />
+                <Text style={styles.iconText}> share </Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.iconButton}>
-                <Ionicons name="ellipsis-horizontal" size={20} color="white" /> 
-                <Text style={styles.iconText}> </Text> 
+                <Ionicons name="ellipsis-horizontal" size={wp('5%')} color="white" />
+                <Text style={styles.iconText}> </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -91,16 +95,16 @@ const Post = ({navigation}) => {
       />
 
       {/* Navbar/Footer */}
-           <View style={styles.navbar}>
-             <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Staff')}>
-               <Image source={require("../assets/icons/home.png")} style={styles.homeimage} />
-               <Text style={styles.navLabel}>Home</Text>
-             </TouchableOpacity>
-             <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
-               <Image source={require("../assets/icons/profile.png")} style={styles.homeimage} />
-               <Text style={styles.navLabel}>Profile</Text>
-             </TouchableOpacity>
-           </View>
+      <View style={styles.navbar}>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Staff')}>
+          <Image source={require("../assets/icons/home.png")} style={styles.homeimage} />
+          <Text style={styles.navLabel}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
+          <Image source={require("../assets/icons/profile.png")} style={styles.homeimage} />
+          <Text style={styles.navLabel}>Profile</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -109,14 +113,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#0D1B2A",
-    paddingBottom: 60,
+    paddingBottom: hp('7%'), // 7% of screen height
   },
   topNavbar: {
     backgroundColor: "white",
-    height: 60,
+    height: hp('8%'), // 8% of screen height
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 15,
+    paddingHorizontal: wp('4%'), // 4% of screen width
     shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 2 },
@@ -124,71 +128,74 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   logo: {
-    width: 50,
-    height: 50,
+    width: wp('12%'), // 12% of screen width
+    height: wp('12%'), // 12% of screen width (to maintain aspect ratio)
     resizeMode: "contain",
   },
   profileCard: {
     backgroundColor: "white",
-    padding: 15,
-    borderRadius: 10,
+    padding: wp('4%'), // 4% of screen width
+    borderRadius: wp('2%'), // 2% of screen width
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 10,
-    marginHorizontal: 10,
+    marginVertical: hp('1.5%'), // 1.5% of screen height
+    marginHorizontal: wp('3%'), // 3% of screen width
   },
-  profile:{
-    height:100,
-    width:100,
+  profile: {
+    height: wp('25%'), // 25% of screen width
+    width: wp('25%'), // 25% of screen width (to maintain aspect ratio)
   },
   profileInfo: {
     flex: 1,
     color: "black",
+    marginLeft: wp('3%'), // 3% of screen width
   },
   name: {
     color: "black",
-    fontSize: 18,
+    fontSize: wp('5%'), // 5% of screen width
     fontWeight: "bold",
   },
   letter: {
     color: "black",
-    fontSize: 10,
+    fontSize: wp('3%'), // 3% of screen width
     fontWeight: "semibold",
   },
   actionRow: {
     flexDirection: "row",
-    justifyContent:'space-evenly',
-    marginTop: 10,
+    justifyContent: 'space-evenly',
+    marginTop: hp('1.5%'), // 1.5% of screen height
+    marginBottom:hp('5%'),
   },
-  buttonContainer:{
-    flexDirection:'row',
+  buttonContainer: {
+    flexDirection: 'row',
+    marginTop: hp('1.5%'), // 1.5% of screen height
   },
   actionButton: {
     flexDirection: "row",
-    justifyContent:'center',
+    justifyContent: 'center',
     alignItems: "center",
     backgroundColor: "blue",
-    color:'white',
-    width:70,
-    padding: 5,
-    borderRadius: 20,
-    marginHorizontal: 5,
+    color: 'white',
+    width: wp('20%'), // 20% of screen width
+    padding: wp('1.5%'), // 1.5% of screen width
+    borderRadius: wp('5%'), // 5% of screen width
+    marginHorizontal: wp('1%'), // 1% of screen width
   },
-  actionButtonpost:{
+  actionButtonpost: {
     flexDirection: "row",
-    justifyContent:'center',
+    justifyContent: 'center',
     alignItems: "center",
     backgroundColor: "blue",
-    color:'white',
-    width:100,
-    padding: 5,
-    borderRadius: 20,
-    marginHorizontal: 5,
+    color: 'white',
+    width: wp('25%'), // 25% of screen width
+    padding: wp('1.5%'), // 1.5% of screen width
+    borderRadius: wp('5%'), // 5% of screen width
+    marginHorizontal: wp('1%'), // 1% of screen width
   },
   buttonText: {
     color: "white",
-    fontSize: 14,
-    paddingRight:10,
+    fontSize: wp('3.5%'), // 3.5% of screen width
+    paddingRight: wp('2%'), // 2% of screen width
   },
   iconButton: {
     flexDirection: "row",
@@ -196,23 +203,26 @@ const styles = StyleSheet.create({
   },
   post: {
     color: "white",
-    marginLeft: 20,
-    fontSize: 18,
+    marginLeft: wp('5%'), // 5% of screen width
+    fontSize: wp('5%'), // 5% of screen width
     fontWeight: "bold",
+    marginTop: hp('2%'), // 2% of screen height
   },
-  postImage:{
-    height:190,
-    width:'100%'
+  postImage: {
+    height: hp('25%'), // 25% of screen height
+    width: '100%',
+    marginTop: hp('2%'), // 2% of screen height
   },
   postdescription: {
     color: "white",
-    marginLeft: 30,
-    fontSize: 14,
+    marginLeft: wp('7%'), // 7% of screen width
+    fontSize: wp('3.5%'), // 3.5% of screen width
     fontWeight: "semibold",
+    marginTop: hp('1%'), // 1% of screen height
   },
   iconText: {
     color: "white",
-    marginLeft: 5,
+    marginLeft: wp('1%'), // 1% of screen width
   },
   navbar: {
     flexDirection: 'row',
@@ -221,15 +231,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     left: 0,
-    right:0,
+    right: 0,
+    paddingVertical: hp('1.5%'), // 1.5% of screen height
   },
   homeimage: {
-    height: 42,
-    width: 40,
+    height: hp('6%'), // 6% of screen height
+    width: wp('10%'), // 10% of screen width
   },
   navLabel: {
-    fontSize: 10,
-    marginLeft: 5,
+    fontSize: wp('3%'), // 3% of screen width
+    marginLeft: wp('1%'), // 1% of screen width
   },
 });
 

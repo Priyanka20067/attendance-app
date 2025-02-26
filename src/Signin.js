@@ -1,11 +1,12 @@
 import React from "react";
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
-// Add the navigation prop to the component
 const Signin = ({ navigation }) => {
-  // Function to handle sign-in button press
   const handleSignIn = () => {
-    // After successful sign-in, navigate to Home screen
     navigation.navigate('Home');
   };
 
@@ -13,7 +14,7 @@ const Signin = ({ navigation }) => {
     <View style={styles.container}>
       {/* Logo */}
       <Image
-        source={require("../assets/icons/jeclogo.png")} // Replace with the correct path to your local logo file
+        source={require("../assets/icons/jeclogo.png")}
         style={styles.logo}
       />
 
@@ -21,7 +22,7 @@ const Signin = ({ navigation }) => {
       <Text style={styles.signInText}>Sign In</Text>
 
       {/* Username Input */}
-      <Text  style={styles.title}>USERNAME</Text>
+      <Text style={styles.title}>USERNAME</Text>
       <TextInput
         style={styles.input}
         placeholder="Enter your name"
@@ -41,13 +42,13 @@ const Signin = ({ navigation }) => {
       <Text style={styles.forgotPasswordText}>Forgot password?</Text>
 
       {/* Sign In Button */}
-      <TouchableOpacity style={styles.signInButton} onPress={() => navigation.navigate('Home')}>
+      <TouchableOpacity style={styles.signInButton} onPress={handleSignIn}>
         <Text style={styles.signInButtonText}>Sign In</Text>
       </TouchableOpacity>
 
       {/* Illustration */}
       <Image
-        source={require("../assets/icons/Login-rafiki 2.png")} 
+        source={require("../assets/icons/Login-rafiki 2.png")}
         style={styles.illustration}
       />
     </View>
@@ -60,61 +61,60 @@ const styles = StyleSheet.create({
     backgroundColor: "#12172B",
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
-    fontFamily:'Poppins',
+    padding: wp('5%'), // 5% of screen width
+    fontFamily: 'Poppins',
   },
   logo: {
-    width: 100,
-    height: 100,
-    marginBottom: 20,
+    width: wp('25%'), // 25% of screen width
+    height: wp('25%'), // 25% of screen width (to maintain aspect ratio)
+    marginBottom: hp('3%'), // 3% of screen height
   },
   signInText: {
-    fontSize: 50,
     color: "#FFF",
     fontWeight: "bold",
-    marginBottom: 20,
+    fontSize: wp('10%'), // 10% of screen width
+    marginBottom: hp('3%'), // 3% of screen height
   },
-  title:{
-     color:'#FFF',
-    alignSelf:'left',
-    marginLeft:10,
-    marginBottom:5,
+  title: {
+    color: '#FFF',
+    alignSelf: 'flex-start',
+    marginLeft: wp('5%'), // 5% of screen width
+    marginBottom: hp('1%'), // 1% of screen height
+    fontSize: wp('4%'), // 4% of screen width
   },
   input: {
-    width: 300,
-    maxHeight:35,
-    backgroundColor:'#FFFFFF',
-    borderRadius:2,
-    marginBottom: 15,
+    backgroundColor: '#FFFFFF',
+    borderRadius: wp('1%'), // 1% of screen width
+    marginBottom: hp('2%'), // 2% of screen height
     color: "gray",
-    fontSize:12,
+    width: wp('80%'), // 80% of screen width
+    height: hp('5%'), // 5% of screen height
+    paddingHorizontal: wp('3%'), // 3% of screen width
   },
   forgotPasswordText: {
     color: '#2869FA',
-    marginBottom: 20,
-    fontSize:9,
-    justifyContent:'flex-start',
-    alignSelf:'flex-start',
-    marginLeft:10,
-    marginTop:-10,
+    marginBottom: hp('3%'), // 3% of screen height
+    alignSelf: 'flex-start',
+    marginLeft: wp('5%'), // 5% of screen width
+    marginTop: hp('-1%'), // -1% of screen height
+    fontSize: wp('3.5%'), // 3.5% of screen width
   },
   signInButton: {
-   
     backgroundColor: "#007BFF",
-    borderRadius: 7,
-    paddingVertical: 10,
-    paddingHorizontal: 60,
+    borderRadius: wp('2%'), // 2% of screen width
     alignItems: "center",
+    paddingVertical: hp('1.5%'), // 1.5% of screen height
+    paddingHorizontal: wp('20%'), // 20% of screen width
   },
   signInButtonText: {
     color: "#FFF",
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: wp('4.5%'), // 4.5% of screen width
   },
   illustration: {
-    width: 300,
-    height: 270,
-    marginTop: 30,
+    width: wp('80%'), // 80% of screen width
+    height: hp('30%'), // 30% of screen height
+    marginTop: hp('5%'), // 5% of screen height
   },
 });
 

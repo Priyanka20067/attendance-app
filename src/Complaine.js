@@ -8,8 +8,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
-const Complaine = ({navigation}) => {
+const Complaine = ({ navigation }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
 
   return (
@@ -89,12 +93,12 @@ const Complaine = ({navigation}) => {
         <Text style={styles.othersButtonText}>Others</Text>
       </TouchableOpacity>
 
-      {/* subject Description  */}
+      {/* Subject Description */}
       <Text style={styles.descriptionLabel}>SUBJECT</Text>
       <TextInput
         style={styles.textAreasmall}
-        placeholder="Rgaring : Syllobus Difficult  issues"
-        placeholderTextColor="Black"
+        placeholder="Regarding: Syllabus Difficult Issues"
+        placeholderTextColor="black"
       />
 
       {/* Complaint Description */}
@@ -107,21 +111,21 @@ const Complaine = ({navigation}) => {
       />
 
       {/* Submit Button */}
-      <TouchableOpacity style={styles.submitButton}>
+      <TouchableOpacity style={styles.submitButton} >
         <Text style={styles.submitButtonText}>SUBMIT</Text>
       </TouchableOpacity>
 
       {/* Bottom Navigation */}
       <View style={styles.navbar}>
-                          <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
-                            <Image source={require("../assets/icons/home.png")} style={styles.homeimage}/>
-                            <Text style={styles.navLabel}>Home</Text> 
-                          </TouchableOpacity>
-                          <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Profile')}>
-                            <Image source={require("../assets/icons/profile.png")} style={styles.homeimage}/>
-                            <Text style={styles.navLabel}>Profile</Text> 
-                          </TouchableOpacity>
-            </View>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
+          <Image source={require("../assets/icons/home.png")} style={styles.homeimage} />
+          <Text style={styles.navLabel}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Profile')}>
+          <Image source={require("../assets/icons/profile.png")} style={styles.homeimage} />
+          <Text style={styles.navLabel}>Profile</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -135,108 +139,111 @@ const styles = StyleSheet.create({
   topBar: {
     backgroundColor: "white",
     width: "100%",
-    height: 80,
+    height: hp('10%'), // 10% of screen height
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   logo: {
-    width: 60,
-    height: 60,
+    width: wp('15%'), // 15% of screen width
+    height: wp('15%'), // 15% of screen width (to maintain aspect ratio)
   },
   complaintTitle: {
     color: "white",
-    fontSize: 20,
+    fontSize: wp('5%'), // 5% of screen width
     fontWeight: "bold",
     textDecorationLine: "underline",
-    marginVertical: 10,
+    marginVertical: hp('2%'), // 2% of screen height
   },
   categoryLabel: {
     color: "white",
-    fontSize: 16,
-    marginTop: 10,
-    paddingLeft:10,
-    justifyContent:'flex-start',
-    alignSelf:'flex-start',
+    fontSize: wp('4%'), // 4% of screen width
+    marginTop: hp('2%'), // 2% of screen height
+    paddingLeft: wp('5%'), // 5% of screen width
+    alignSelf: 'flex-start',
   },
   dropdownContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "90%",
-    marginTop: 10,
+    width: wp('90%'), // 90% of screen width
+    marginTop: hp('2%'), // 2% of screen height
   },
   dropdown: {
     backgroundColor: "white",
-    width: "45%",
-    borderRadius: 10,
+    width: wp('43%'), // 43% of screen width
+    borderRadius: wp('2%'), // 2% of screen width
   },
   othersButton: {
     backgroundColor: 'white',
-    padding: 10,
-    borderRadius: 10,
-    marginVertical: 20,
+    padding: wp('3%'), // 3% of screen width
+    borderRadius: wp('2%'), // 2% of screen width
+    marginVertical: hp('2%'), // 2% of screen height
   },
   othersButtonText: {
     color: "black",
     fontWeight: "bold",
+    fontSize: wp('4%'), // 4% of screen width
   },
   descriptionLabel: {
     color: "white",
-    fontSize: 16,
-    marginVertical: 5,
-    justifyContent:'flex-start',
-    alignSelf:'flex-start',
-    paddingLeft:10,
+    fontSize: wp('4%'), // 4% of screen width
+    marginVertical: hp('1%'), // 1% of screen height
+    alignSelf: 'flex-start',
+    paddingLeft: wp('5%'), // 5% of screen width
   },
   textArea: {
     backgroundColor: "lightgray",
-    width: "90%",
-    height: 100,
-    borderRadius: 10,
-    padding: 10,
+    width: wp('90%'), // 90% of screen width
+    height: hp('15%'), // 15% of screen height
+    borderRadius: wp('2%'), // 2% of screen width
+    padding: wp('3%'), // 3% of screen width
     textAlignVertical: "top",
-    marginVertical:10,
+    marginVertical: hp('1%'), // 1% of screen height
   },
-  textAreasmall:{
+  textAreasmall: {
     backgroundColor: "lightgray",
-    width: "90%",
-    borderRadius: 10,
-    padding: 10,
+    width: wp('90%'), // 90% of screen width
+    borderRadius: wp('2%'), // 2% of screen width
+    padding: wp('3%'), // 3% of screen width
     textAlignVertical: "top",
   },
   submitButton: {
     backgroundColor: "white",
-    padding:10,
-    borderRadius: 10,
-    marginVertical: 20,
+    padding: wp('3%'), // 3% of screen width
+    borderRadius: wp('2%'), // 2% of screen width
+    marginVertical: hp('2%'), // 2% of screen height
   },
   submitButtonText: {
     color: "black",
     fontWeight: "bold",
+    fontSize: wp('4%'), // 4% of screen width
   },
-  navbar:{
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-around',
-    backgroundColor:'white',
-    width:390,
-    
-    },
-    homeimage:{
-    height:42,
-    width:40,
-    },
-    navLabel:{
-      fontSize:10,
-      marginLeft:5,
-    },
+  navbar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: 'white',
+    width: wp('100%'), // 100% of screen width
+    position: 'absolute',
+    bottom: 0,
+    paddingVertical: hp('1.5%'), // 1.5% of screen height
+  },
+  homeimage: {
+    height: hp('6%'), // 6% of screen height
+    width: wp('10%'), // 10% of screen width
+  },
+  navLabel: {
+    fontSize: wp('3%'), // 3% of screen width
+    marginLeft: wp('1%'), // 1% of screen width
+  },
 });
 
 const pickerSelectStyles = {
   inputIOS: {
-    fontSize: 14,
-    color: "white",
+    fontSize: wp('4%'), // 4% of screen width
+    color: "black",
   },
   inputAndroid: {
-    fontSize: 14,
-    color: "white",
+    fontSize: wp('4%'), // 4% of screen width
+    color: "black",
   },
 };
 
