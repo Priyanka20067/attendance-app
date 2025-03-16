@@ -1,113 +1,117 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, TextInput, Image, ActivityIndicator, FlatList, StyleSheet } from 'react-native';
-import * as ImagePicker from 'react-native-image-picker';
-import { MaterialIcons } from '@expo/vector-icons';
+import React from "react";
+import {
+  View,
+  Text,
+  ImageBackground,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { MaterialIcons } from "@expo/vector-icons";
 
-const ITEMS_PER_PAGE = 5;
-
-export default function CollectWasteScreen() {
-  const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selectedTask, setSelectedTask] = useState(null);
-  const [verificationImage, setVerificationImage] = useState(null);
-
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setTasks([
-        { id: 1, location: 'City Park', wasteType: 'Plastic', amount: '5kg', status: 'pending' },
-        { id: 2, location: 'Downtown', wasteType: 'Organic', amount: '10kg', status: 'pending' },
-      ]);
-      setLoading(false);
-    }, 1000);
-  }, []);
-
-  const pickImage = () => {
-    ImagePicker.launchImageLibrary({ mediaType: 'photo' }, response => {
-      if (!response.didCancel && response.assets) {
-        setVerificationImage(response.assets[0].uri);
-      }
-    });
-  };
-
-  const filteredTasks = tasks.filter(task => task.location.toLowerCase().includes(searchTerm.toLowerCase()));
-  const paginatedTasks = filteredTasks.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+const HomePage = () => {
+  const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Waste Collection Tasks</Text>
+    <ImageBackground
+      source={{ uri: "https://images.unsplash.com/photo-1582719478250-d929f3979dbc" }} 
+      style={styles.background}
+      resizeMode="cover"
+    >
+      <View style={styles.overlay}>
+        <ScrollView contentContainerStyle={styles.container}>
+          <Text style={styles.title}>AI-Driven Waste Management System</Text>
 
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search by area..."
-          value={searchTerm}
-          onChangeText={setSearchTerm}
-        />
-        <TouchableOpacity>
-          <MaterialIcons name="search" size={24} color="black" />
-        </TouchableOpacity>
-      </View>
+          <Text style={styles.subtitle}>
+            Smart, Sustainable, and Efficient Waste Solutions
+          </Text>
 
-      {loading ? (
-        <ActivityIndicator size="large" color="blue" />
-      ) : (
-        <FlatList
-          data={paginatedTasks}
-          keyExtractor={item => item.id.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.taskContainer}>
-              <Text style={styles.taskTitle}>{item.location}</Text>
-              <Text style={styles.taskText}>Waste Type: {item.wasteType}</Text>
-              <Text style={styles.taskText}>Amount: {item.amount}</Text>
-              <Text style={styles.taskText}>Status: {item.status}</Text>
-              <TouchableOpacity
-                style={[styles.button, styles.completeButton]}
-                onPress={() => setSelectedTask(item)}
-              >
-                <Text style={styles.buttonText}>Collect Waste</Text>
-              </TouchableOpacity>
+          <View style={styles.featuresContainer}>
+            <View style={styles.featureCard}>
+              <MaterialIcons name="report" size={40} color="#10B981" />
+              <Text style={styles.featureText}>Report Waste</Text>
             </View>
-          )}
-        />
-      )}
+            <View style={styles.featureCard}>
+              <MaterialIcons name="delete" size={40} color="#F59E0B" />
+              <Text style={styles.featureText}>AI Waste Sorting</Text>
+            </View>
+            <View style={styles.featureCard}>
+              <MaterialIcons name="eco" size={40} color="#3B82F6" />
+              <Text style={styles.featureText}>Sustainability Rewards</Text>
+            </View>
+          </View>
 
-      {selectedTask && (
-        <View style={styles.verificationContainer}>
-          <Text style={styles.verificationTitle}>Verify Collection</Text>
-          <TouchableOpacity onPress={pickImage}>
-            <Text style={styles.pickImageText}>Pick Image</Text>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("Dashboard")}
+          >
+            <Text style={styles.buttonText}>Get Started</Text>
           </TouchableOpacity>
-          {verificationImage && (
-            <Image source={{ uri: verificationImage }} style={styles.verificationImage} />
-          )}
-        </View>
-      )}
-    </View>
+        </ScrollView>
+      </View>
+    </ImageBackground>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: '#f7f7f7' },
-  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 16 },
-  searchContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 16 },
-  searchInput: {
-    flex: 1, borderWidth: 1, padding: 8, borderRadius: 8, marginRight: 8,
-    borderColor: '#ccc', backgroundColor: '#fff',
+  background: {
+    flex: 1,
+    justifyContent: "center",
   },
-  taskContainer: {
-    padding: 16, marginBottom: 8, borderWidth: 1, borderRadius: 8,
-    borderColor: '#ddd', backgroundColor: '#fff',
+  overlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)",
   },
-  taskTitle: { fontSize: 16, fontWeight: 'bold' },
-  taskText: { fontSize: 14, color: '#555' },
-  button: { padding: 10, borderRadius: 8, alignItems: 'center', marginTop: 8 },
-  completeButton: { backgroundColor: 'green' },
-  buttonText: { color: 'white', fontWeight: 'bold' },
-  verificationContainer: { padding: 16, backgroundColor: 'white', borderRadius: 8, marginTop: 16 },
-  verificationTitle: { fontSize: 18, fontWeight: 'bold' },
-  pickImageText: { color: 'blue', marginVertical: 8 },
-  verificationImage: { width: 100, height: 100, marginVertical: 8 },
+  container: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  subtitle: {
+    fontSize: 18,
+    color: "#D1D5DB",
+    textAlign: "center",
+    marginBottom: 30,
+  },
+  featuresContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
+    marginBottom: 40,
+  },
+  featureCard: {
+    alignItems: "center",
+    backgroundColor: "rgba(255,255,255,0.1)",
+    padding: 15,
+    borderRadius: 10,
+    width: 100,
+  },
+  featureText: {
+    color: "#FFFFFF",
+    marginTop: 10,
+    fontWeight: "600",
+    textAlign: "center",
+  },
+  button: {
+    backgroundColor: "#10B981",
+    paddingVertical: 12,
+    paddingHorizontal: 25,
+    borderRadius: 10,
+  },
+  buttonText: {
+    color: "#FFFFFF",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
 });
+
+export default HomePage;

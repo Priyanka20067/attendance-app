@@ -14,7 +14,7 @@ const Start = ({ navigation }) => {
   };
 
   const handleGetStarted = () => {
-    Alert.alert('Get Started', 'Let’s clean up the planet together!');
+    navigation.navigate('SignUp');
   };
 
   return (
