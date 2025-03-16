@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet, Alert, TouchableOpacity, Platform } from 'react-native';
 import axios from 'axios';
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -13,11 +13,14 @@ const LoginScreen = () => {
     }
 
     try {
-      const response = await axios.post('http://YOUR_BACKEND_URL/api/login', {
+      const response = await axios.post('${API_URL}/api/login', {
         email,
         password,
       });
+
       Alert.alert('Success', `Welcome ${response.data.user.name}`);
+      // Navigate to Dashboard on success
+      navigation.navigate('Dashboard');
     } catch (error) {
       Alert.alert('Login Failed', error.response?.data?.message || 'Something went wrong');
     }
@@ -45,7 +48,7 @@ const LoginScreen = () => {
         secureTextEntry
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+      <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate('Dashboard')}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
     </View>
